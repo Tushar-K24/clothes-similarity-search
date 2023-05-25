@@ -4,11 +4,14 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 
-nltk.download("stopwords")
-
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+
+nltk.download("stopwords")
+nltk.download("punkt")
+nltk.download("wordnet")
+nltk.download("omw-1.4")
 
 
 class TFIDF:

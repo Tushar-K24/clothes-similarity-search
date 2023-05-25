@@ -11,6 +11,7 @@ from encode.encoders.tfidf import TFIDF
 # initialize product encodings
 print("reading encodings...")
 df = pd.read_csv(filePath, dtype=str)
+print(f"df: {df}")
 encoded_products = df["encoded"].apply(ast.literal_eval)
 
 print("generating encoding matrix...")

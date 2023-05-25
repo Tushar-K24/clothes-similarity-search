@@ -1,11 +1,10 @@
-import sys
 import ast
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 # from encoders.bert import BERT
-from encodings.encoders.tfidf import TFIDF
+from encode.encoders.tfidf import TFIDF
 
 
 # initialize product encodings

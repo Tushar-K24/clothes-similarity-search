@@ -16,7 +16,7 @@ The scraped data is further feature-engineered and preprocessed to generate a wo
 
 **Encoder** uses Tfidf-Vectorizer to generate sentence embeddings for every product description of size _1 x MAX_FEATURES_ _(default = 1000)_.
 
-The tf-idf encoded data is hosted on a cloud bucket for public access at 
+The tf-idf encoded data is hosted on a cloud bucket for public access at
 
 ***https://storage.googleapis.com/product-encodings/encodings.csv***
 

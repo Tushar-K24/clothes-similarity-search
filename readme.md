@@ -52,3 +52,8 @@ After creating a virtual environment in the cloned repository, install the depen
 ```
 pip install -r requirements-script.txt
 ```
+
+## Cloud Function Testing 
+- ![image](https://github.com/Tushar-K24/clothes-similarity-search/assets/62638544/2ae6651b-5a43-4878-ab3e-bc34dd9484c9)
+
+- ![image](https://github.com/Tushar-K24/clothes-similarity-search/assets/62638544/783926ba-2840-4eb8-911f-52a93920b9f5)

@@ -2,6 +2,7 @@ import ast
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
+from config import filePath
 
 # from encoders.bert import BERT
 from encode.encoders.tfidf import TFIDF
@@ -9,7 +10,7 @@ from encode.encoders.tfidf import TFIDF
 
 # initialize product encodings
 print("reading encodings...")
-df = pd.read_csv("encodings.csv", dtype=str)
+df = pd.read_csv(filePath, dtype=str)
 encoded_products = df["encoded"].apply(ast.literal_eval)
 
 print("generating encoding matrix...")

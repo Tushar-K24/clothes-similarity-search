@@ -9,5 +9,6 @@ In order to start the scraping script, you need to add request headers and paylo
 After adding the request headers, change your directory to your repository in terminal and write the command
 
 ```
-python prepareData/main.py
+cd prepareData
+python main.py
 ```

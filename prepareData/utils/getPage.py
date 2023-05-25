@@ -1,5 +1,5 @@
 import requests
-from requestHeaderData import headers, payload
+from prepareData.requestHeaderData import headers, payload
 
 ################## Request Parameters ##############################################################
 

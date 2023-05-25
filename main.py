@@ -2,6 +2,7 @@ from similarProducts import findSimilarItems
 
 
 def clothesSuggestions(request):
+    return "Hello World"
     request_json = request.get_json()
     description, limit = None, 10
 

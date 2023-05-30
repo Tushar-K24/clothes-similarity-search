@@ -1,13 +1,39 @@
 import pandas as pd
 from tqdm import tqdm
-
-from encoders import tfidf
+from prepareData.preprocessData import cleanText, selected_features
+from .encoders import tfidf
 
 # load encoder
 encoder = tfidf.TFIDF()
 
 # define filePath
 filePath = "../productDetailsCleaned.csv"
+
+
+def generateEncodingsFireStore(docs):
+    """
+    generates encodings and adds it to the fireStore db
+    """
+    productIds, corpus = [], []
+
+    for doc in tqdm(docs.values()):
+        productIds.append(doc["productId"])
+        sent = ""
+        for feature in selected_features:
+            if isinstance(doc[feature], str):
+                sent += doc[feature] + " "
+            elif isinstance(doc[feature], list):
+                sent += " ".join(doc[feature]) + " "
+        corpus.append(cleanText(sent))
+
+    # uncomment for bert
+    # encoded = []
+    # for sent in tqdm(corpus):
+    #     encoded.append(encoder.encode(sent))
+
+    # uncomment for tfidf
+    encoded = encoder.fit(corpus)
+    return encoded
 
 
 def generateEncodings(df, save=False, fileName="encodings.csv"):
@@ -42,8 +68,3 @@ def generateEncodings(df, save=False, fileName="encodings.csv"):
         encoded_df.to_csv(fileName, index=False)
 
     return encoded_df
-
-
-if __name__ == "__main__":
-    df = pd.read_csv(filePath, dtype=str)
-    generateEncodings(df, save=True, fileName="../encodings.csv")

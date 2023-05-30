@@ -44,7 +44,7 @@ class TFIDF:
         encodings = self.tfidf.fit_transform(cleaned_corpus)
 
         # save trained encoder
-        pickle.dump(self.tfidf, open("../" + self.name, "wb"))
+        pickle.dump(self.tfidf, open(self.name, "wb"))
         return encodings.todense().tolist()
 
     def encode(self, sent):

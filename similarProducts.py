@@ -1,21 +1,34 @@
-import ast
+import time
 import numpy as np
 import pandas as pd
+import pickle
 from sklearn.metrics.pairwise import cosine_similarity
-from config import filePath
 
 # from encoders.bert import BERT
 from encode.encoders.tfidf import TFIDF
+from createFirestoreDatabase import find
 
-
+collection = "products"
 # initialize product encodings
-print("reading encodings...")
-df = pd.read_csv(filePath, dtype=str)
+print("reading encodings")
+st = time.time()
+encoded_products = []
+productIds = []
+# docs = find(collection)
+with open("productDescriptions.pkl", "rb") as f:
+    docs = pickle.load(f)
 
-encoded_products = df["encoded"].apply(ast.literal_eval)
+for _, doc in docs.items():
+    # doc = doc.to_dict()
+    encoded_products.append(doc["encoded"])
+    productIds.append(doc["productId"])
+productIds = pd.Series(productIds)
+print(f"reading time: {time.time()-st}")
 
 print("generating encoding matrix...")
+st = time.time()
 encoding_matrix = np.array(list(encoded_products))
+print(f"encoding matrix: {time.time()-st}")
 
 # initialize encoder
 # encoder = BERT()
@@ -58,18 +71,18 @@ def findSimilarItems(description, num=10):
     # similarity vector
     indices = findSimilarity(description)
 
-    added_product = set()
+    # added_product = set()
 
     url_list = []
 
-    productIds = df["productId"].iloc[indices]
+    pids = productIds[indices]
 
-    for productId in productIds:
+    for productId in pids:
         if len(url_list) == num:
             break
-        if productId not in added_product:
-            added_product.add(productId)
-            url_list.append(generateUrl(productId))
+        # if productId not in added_product:
+        #     added_product.add(productId)
+        url_list.append(generateUrl(productId))
 
     return {"similarItems": url_list}
 

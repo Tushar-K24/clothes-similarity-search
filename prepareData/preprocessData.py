@@ -1,6 +1,16 @@
 import re
 from tqdm import tqdm
 
+selected_features = [
+    "description",
+    "detailedDescriptions",
+    "compositions",
+    "category",
+    "ageGender",
+    "alternate",
+    # "materialDetails",
+]
+
 
 def cleanText(sent):
     sent = sent.lower()  # lowercase the sentence
@@ -14,16 +24,6 @@ def cleanText(sent):
 
 def generateProductDescription(df):
     # features to be selected for generating product encodings
-    selected_features = [
-        "description",
-        "detailedDescriptions",
-        "compositions",
-        "category",
-        "subcategory",
-        "ageGender",
-        "alternate",
-        # "materialDetails",
-    ]
 
     cleaned_corpus = []
     print("Cleaning text...")

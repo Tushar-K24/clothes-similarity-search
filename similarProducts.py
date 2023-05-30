@@ -1,4 +1,4 @@
-import time
+# import time
 import numpy as np
 import pandas as pd
 import pickle
@@ -6,12 +6,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # from encoders.bert import BERT
 from encode.encoders.tfidf import TFIDF
-from createFirestoreDatabase import find
+
+# from createFirestoreDatabase import find
 
 collection = "products"
 # initialize product encodings
 print("reading encodings")
-st = time.time()
+# st = time.time()
 encoded_products = []
 productIds = []
 # docs = find(collection)
@@ -23,12 +24,12 @@ for _, doc in docs.items():
     encoded_products.append(doc["encoded"])
     productIds.append(doc["productId"])
 productIds = pd.Series(productIds)
-print(f"reading time: {time.time()-st}")
+# print(f"reading time: {time.time()-st}")
 
 print("generating encoding matrix...")
-st = time.time()
+# st = time.time()
 encoding_matrix = np.array(list(encoded_products))
-print(f"encoding matrix: {time.time()-st}")
+# print(f"encoding matrix: {time.time()-st}")
 
 # initialize encoder
 # encoder = BERT()

@@ -4,7 +4,6 @@ from prepareDataFirebase.pipeline import getProducts
 from encode.generateEncodings import generateEncodingsFireStore
 from createFirestoreDatabase import create
 
-
 if __name__ == "__main__":
     collection = "products"
 

@@ -20,7 +20,35 @@ The scraped data is further feature-engineered and preprocessed to generate a wo
 
 **Similarity Function** utilizes cosine similarity by _scikit-learn_ to generate a similarity measure between the **product description** and the **database** and provide n-ranked results to the user.
 
-The similarity function can be accessed publicly from [here](https://asia-south1-clothes-similarity.cloudfunctions.net/clothes-similarity-noauth)
+The similarity function can be accessed by making a post request
+
+Node.js
+
+```
+const axios = require('axios');
+let data = JSON.stringify({
+  "description": "a white hat made of cotton",
+  "limit": 5
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://asia-south1-clothes-similarity.cloudfunctions.net/clothes-similarity-noauth',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+```
 
 ## Function Description
 

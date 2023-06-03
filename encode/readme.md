@@ -4,9 +4,8 @@ Encodes the product descriptions in vectorized form and saves the trained encode
 
 ## Quickstart:
 
-To encode the data, change your directory to your repository in terminal and write the command
+To encode the data, import the function generateEncodingsFireStore fromt the encode package:
 
 ```
-cd encode
-python main.py
+from encode.generateEncodings import generateEncodingsFireStore
 ```

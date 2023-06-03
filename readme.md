@@ -92,4 +92,3 @@ A simple interactive user-interface for the same function can be accessed from t
 - ![image](https://github.com/Tushar-K24/clothes-similarity-search/assets/62638544/7faf6adf-c5ab-4583-b29a-af4649bc0f96)
 
 - ![image](https://github.com/Tushar-K24/clothes-similarity-search/assets/62638544/0c53e708-61d1-45cd-bd70-f1aeadc1f1b6)
-

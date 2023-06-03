@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # from encoders.bert import BERT
 from encode.encoders.tfidf import TFIDF
 
-# from createFirestoreDatabase import find
+from createFirestoreDatabase import find
 
 collection = "products"
 # initialize product encodings
@@ -15,12 +15,10 @@ print("reading encodings")
 # st = time.time()
 encoded_products = []
 productIds = []
-# docs = find(collection)
-with open("productDescriptions.pkl", "rb") as f:
-    docs = pickle.load(f)
+docs = find(collection)
 
-for _, doc in docs.items():
-    # doc = doc.to_dict()
+for doc in docs.items():
+    doc = doc.to_dict()
     encoded_products.append(doc["encoded"])
     productIds.append(doc["productId"])
 productIds = pd.Series(productIds)

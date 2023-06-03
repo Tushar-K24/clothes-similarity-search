@@ -23,14 +23,16 @@ def getItemDetails(htmlPage):
     """
     returns all the product ids and corresponding images available on htmlPage
     """
-    Ids, imageLinks = [], []
+    ids, imageLinks, prices = [], [], []
     soup = BeautifulSoup(htmlPage, "html.parser")
     for product_item in soup.find_all(class_="hm-product-item"):
         itemLink = product_item.a.get("href")
         imageLink = product_item.img["data-src"]
-        Ids.append(itemLink[19:-5])
+        price = product_item.find(class_="item-price").text
+        ids.append(itemLink[19:-5])
         imageLinks.append(imageLink)
-    return Ids, imageLinks
+        prices.append(price)
+    return ids, imageLinks, prices
 
 
 def getProductIds():
@@ -44,7 +46,7 @@ def getProductIds():
         category = categoryDict["category"]
         subcategory = categoryDict["subcategory"]
 
-        articleIds, articleImageLinks = [], []
+        articleIds, articleImageLinks, articlePrices = [], [], []
 
         relUrl_ = relUrl.replace("{category}", category).replace(
             "{subcategory}", subcategory
@@ -60,13 +62,16 @@ def getProductIds():
         for offset in tqdm(range(0, totalCount, pagesize)):
             filters_ = filters.replace("{offset}", str(offset))
             htmlPage = getPage(baseUrl + relUrl_ + filters_)
-            ids, imageLinks = getItemDetails(htmlPage)
+            ids, imageLinks, prices = getItemDetails(htmlPage)
             articleIds.extend(ids)
             articleImageLinks.extend(imageLinks)
+            articlePrices.extend(prices)
 
         # update the fireStore database
         print("Creating collection...")
-        for id, imageLink in tqdm(zip(articleIds, articleImageLinks)):
+        for id, imageLink, price in tqdm(
+            zip(articleIds, articleImageLinks, articlePrices)
+        ):
             # check if product id already exists
 
             if id in productIds:
@@ -75,6 +80,7 @@ def getProductIds():
                 productIds[id] = {
                     "productId": id,
                     "imageUrl": imageLink,
+                    "price": price,
                     "category": [f"{category}/{subcategory}"],
                 }
 

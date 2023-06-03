@@ -12,8 +12,8 @@ if __name__ == "__main__":
     #     pickle.dump(productDescriptions, f)
     #     print("dictionary saved")
 
-    with open("productDescriptionsScraped.pkl", "rb") as f:
-        productDescriptions = pickle.load(f)
+    # with open("productDescriptionsScraped.pkl", "rb") as f:
+    #     productDescriptions = pickle.load(f)
 
     encodings = generateEncodingsFireStore(productDescriptions)
 
@@ -23,9 +23,9 @@ if __name__ == "__main__":
     for idx, pid in tqdm(enumerate(productDescriptions.keys())):
         productDescriptions[pid]["encoded"] = encodings[idx]
 
-    with open("productDescriptions.pkl", "wb") as f:
-        pickle.dump(productDescriptions, f)
-        print("dictionary saved")
+    # with open("productDescriptions.pkl", "wb") as f:
+    #     pickle.dump(productDescriptions, f)
+    #     print("dictionary saved")
 
     print("Creating fireStore Database")
     for pid in tqdm(productDescriptions.keys()):

@@ -84,3 +84,7 @@ pip install -r requirements-script.txt
 - ![image](https://github.com/Tushar-K24/clothes-similarity-search/assets/62638544/2ae6651b-5a43-4878-ab3e-bc34dd9484c9)
 
 - ![image](https://github.com/Tushar-K24/clothes-similarity-search/assets/62638544/783926ba-2840-4eb8-911f-52a93920b9f5)
+
+## Product Recommendation UI
+
+A simple interactive user-interface for the same function can be accessed from this [link](https://hm-product-recommendations.netlify.app/)

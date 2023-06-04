@@ -17,7 +17,7 @@ encoded_products = []
 productIds = []
 docs = find(collection)
 
-for doc in docs.items():
+for doc in docs:
     doc = doc.to_dict()
     encoded_products.append(doc["encoded"])
     productIds.append(doc["productId"])
